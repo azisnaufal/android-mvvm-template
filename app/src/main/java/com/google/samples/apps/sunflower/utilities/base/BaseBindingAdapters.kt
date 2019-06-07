@@ -14,20 +14,16 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.utilities.base
 
-import androidx.room.Embedded
-import androidx.room.Relation
+import android.view.View
+import androidx.databinding.BindingAdapter
 
-/**
- * This class captures the relationship between a [Plant] and a user's [GardenPlanting], which is
- * used by Room to fetch the related entities.
- */
-class PlantAndGardenPlantings {
-
-    @Embedded
-    lateinit var plant: Plant
-
-    @Relation(parentColumn = "id", entityColumn = "plant_id")
-    var gardenPlantings: List<GardenPlanting> = arrayListOf()
+@BindingAdapter("isGone")
+fun bindIsGone(view: View, isGone: Boolean) {
+    view.visibility = if (isGone) {
+        View.GONE
+    } else {
+        View.VISIBLE
+    }
 }

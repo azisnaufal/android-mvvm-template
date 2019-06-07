@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.adapters
+package com.google.samples.apps.sunflower.mvvm.garden.plant_detail
 
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod

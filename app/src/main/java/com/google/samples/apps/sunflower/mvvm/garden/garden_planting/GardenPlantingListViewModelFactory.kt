@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,22 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.viewmodels
+package com.google.samples.apps.sunflower.mvvm.garden.garden_planting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.Plant
-import com.google.samples.apps.sunflower.data.PlantRepository
 
 /**
- * Factory for creating a [PlantDetailViewModel] with a constructor that takes a [PlantRepository]
- * and an ID for the current [Plant].
+ * Factory for creating a [GardenPlantingListViewModel] with a constructor that takes a
+ * [GardenPlantingRepository].
  */
-class PlantDetailViewModelFactory(
-    private val plantRepository: PlantRepository,
-    private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
+class GardenPlantingListViewModelFactory(
+    private val repository: GardenPlantingRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return PlantDetailViewModel(plantRepository, gardenPlantingRepository, plantId) as T
+        return GardenPlantingListViewModel(repository) as T
     }
 }

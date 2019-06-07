@@ -24,7 +24,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="viewModel"
-            type="com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel"/>
+            type="com.google.samples.apps.sunflower.mvvm.garden.garden_planting.PlantAndGardenPlantingsViewModel"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

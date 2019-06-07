@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.data
 
+import com.google.samples.apps.sunflower.data.local.PlantDao
+
 /**
  * Repository module for handling data operations.
  */

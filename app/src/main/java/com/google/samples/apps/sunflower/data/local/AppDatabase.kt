@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.local
 
 import android.content.Context
 import androidx.room.Database
@@ -25,7 +25,10 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.samples.apps.sunflower.utilities.DATABASE_NAME
-import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
+import com.google.samples.apps.sunflower.data.local.workers.SeedDatabaseWorker
+import com.google.samples.apps.sunflower.data.model.GardenPlanting
+import com.google.samples.apps.sunflower.data.model.Plant
+import com.google.samples.apps.sunflower.data.utils.Converters
 
 /**
  * The Room database for this app
@@ -43,7 +46,8 @@ abstract class AppDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
-                instance ?: buildDatabase(context).also { instance = it }
+                instance
+                        ?: buildDatabase(context).also { instance = it }
             }
         }
 

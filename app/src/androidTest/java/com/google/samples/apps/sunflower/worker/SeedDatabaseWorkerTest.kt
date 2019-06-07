@@ -21,7 +21,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.work.ListenableWorker.Result
 import androidx.work.WorkManager
 import androidx.work.testing.TestListenableWorkerBuilder
-import com.google.samples.apps.sunflower.workers.SeedDatabaseWorker
+import com.google.samples.apps.sunflower.data.local.workers.SeedDatabaseWorker
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Assert.assertThat
 import org.junit.Before

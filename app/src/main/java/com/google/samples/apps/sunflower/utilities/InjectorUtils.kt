@@ -17,12 +17,12 @@
 package com.google.samples.apps.sunflower.utilities
 
 import android.content.Context
-import com.google.samples.apps.sunflower.data.AppDatabase
+import com.google.samples.apps.sunflower.data.local.AppDatabase
 import com.google.samples.apps.sunflower.data.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.PlantRepository
-import com.google.samples.apps.sunflower.viewmodels.GardenPlantingListViewModelFactory
-import com.google.samples.apps.sunflower.viewmodels.PlantDetailViewModelFactory
-import com.google.samples.apps.sunflower.viewmodels.PlantListViewModelFactory
+import com.google.samples.apps.sunflower.mvvm.garden.garden_planting.GardenPlantingListViewModelFactory
+import com.google.samples.apps.sunflower.mvvm.garden.plant_detail.PlantDetailViewModelFactory
+import com.google.samples.apps.sunflower.mvvm.garden.plant_list.PlantListViewModelFactory
 
 /**
  * Static methods used to inject classes needed for various Activities and Fragments.

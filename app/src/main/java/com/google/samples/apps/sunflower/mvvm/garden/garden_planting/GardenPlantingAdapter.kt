@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.adapters
+package com.google.samples.apps.sunflower.mvvm.garden.garden_planting
 
 import android.view.LayoutInflater
 import android.view.View
@@ -24,21 +24,19 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.samples.apps.sunflower.GardenFragmentDirections
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.data.local.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
-import com.google.samples.apps.sunflower.viewmodels.PlantAndGardenPlantingsViewModel
 
 class GardenPlantingAdapter :
     ListAdapter<PlantAndGardenPlantings, GardenPlantingAdapter.ViewHolder>(GardenPlantDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            DataBindingUtil.inflate(
-                LayoutInflater.from(parent.context),
-                R.layout.list_item_garden_planting, parent, false
-            )
+                DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.list_item_garden_planting, parent, false
+                )
         )
     }
 
@@ -76,15 +74,15 @@ class GardenPlantingAdapter :
 private class GardenPlantDiffCallback : DiffUtil.ItemCallback<PlantAndGardenPlantings>() {
 
     override fun areItemsTheSame(
-        oldItem: PlantAndGardenPlantings,
-        newItem: PlantAndGardenPlantings
+            oldItem: PlantAndGardenPlantings,
+            newItem: PlantAndGardenPlantings
     ): Boolean {
         return oldItem.plant.plantId == newItem.plant.plantId
     }
 
     override fun areContentsTheSame(
-        oldItem: PlantAndGardenPlantings,
-        newItem: PlantAndGardenPlantings
+            oldItem: PlantAndGardenPlantings,
+            newItem: PlantAndGardenPlantings
     ): Boolean {
         return oldItem.plant == newItem.plant
     }

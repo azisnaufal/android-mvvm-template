@@ -16,6 +16,8 @@
 
 package com.google.samples.apps.sunflower.data
 
+import com.google.samples.apps.sunflower.data.local.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.model.GardenPlanting
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 

@@ -31,6 +31,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.uiautomator.UiDevice
+import com.google.samples.apps.sunflower.mvvm.garden.GardenActivity
 import com.google.samples.apps.sunflower.utilities.getToolbarNavigationContentDescription
 import org.junit.Assert.assertEquals
 import org.junit.Rule
