@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.data.local.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.data.source.local.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
 
 class GardenPlantingAdapter :

@@ -20,9 +20,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.map
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.source.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.model.Plant
-import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.data.source.PlantRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -31,9 +31,9 @@ import kotlinx.coroutines.launch
  * The ViewModel used in [PlantDetailFragment].
  */
 class PlantDetailViewModel(
-    plantRepository: PlantRepository,
-    private val gardenPlantingRepository: GardenPlantingRepository,
-    private val plantId: String
+        plantRepository: PlantRepository,
+        private val gardenPlantingRepository: GardenPlantingRepository,
+        private val plantId: String
 ) : ViewModel() {
 
     val isPlanted: LiveData<Boolean>

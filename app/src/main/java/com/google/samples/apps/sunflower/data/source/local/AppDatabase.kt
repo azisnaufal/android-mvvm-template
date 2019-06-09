@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data.local
+package com.google.samples.apps.sunflower.data.source.local
 
 import android.content.Context
 import androidx.room.Database
@@ -25,7 +25,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.google.samples.apps.sunflower.utilities.DATABASE_NAME
-import com.google.samples.apps.sunflower.data.local.workers.SeedDatabaseWorker
+import com.google.samples.apps.sunflower.data.source.local.workers.SeedDatabaseWorker
 import com.google.samples.apps.sunflower.data.model.GardenPlanting
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.data.utils.Converters

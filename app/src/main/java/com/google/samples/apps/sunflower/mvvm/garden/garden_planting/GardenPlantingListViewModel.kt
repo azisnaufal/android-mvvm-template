@@ -19,8 +19,8 @@ package com.google.samples.apps.sunflower.mvvm.garden.garden_planting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
-import com.google.samples.apps.sunflower.data.GardenPlantingRepository
-import com.google.samples.apps.sunflower.data.local.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.data.source.GardenPlantingRepository
+import com.google.samples.apps.sunflower.data.source.local.PlantAndGardenPlantings
 
 class GardenPlantingListViewModel internal constructor(
     gardenPlantingRepository: GardenPlantingRepository

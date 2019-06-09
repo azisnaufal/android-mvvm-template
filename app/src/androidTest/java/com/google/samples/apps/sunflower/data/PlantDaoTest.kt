@@ -20,8 +20,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.samples.apps.sunflower.data.local.AppDatabase
-import com.google.samples.apps.sunflower.data.local.PlantDao
+import com.google.samples.apps.sunflower.data.source.local.AppDatabase
+import com.google.samples.apps.sunflower.data.source.local.PlantDao
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.utilities.getValue
 import org.hamcrest.Matchers.equalTo

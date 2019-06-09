@@ -19,7 +19,7 @@ package com.google.samples.apps.sunflower.mvvm.garden.garden_planting
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableInt
 import androidx.lifecycle.ViewModel
-import com.google.samples.apps.sunflower.data.local.PlantAndGardenPlantings
+import com.google.samples.apps.sunflower.data.source.local.PlantAndGardenPlantings
 import java.text.SimpleDateFormat
 import java.util.Locale
 

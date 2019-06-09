@@ -19,7 +19,7 @@ package com.google.samples.apps.sunflower.mvvm.garden.plant_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-import com.google.samples.apps.sunflower.data.PlantRepository
+import com.google.samples.apps.sunflower.data.source.PlantRepository
 
 /**
  * Factory for creating a [PlantListViewModel] with a constructor that takes a [PlantRepository].

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.source
 
-import com.google.samples.apps.sunflower.data.local.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.source.local.GardenPlantingDao
 import com.google.samples.apps.sunflower.data.model.GardenPlanting
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
@@ -51,8 +51,10 @@ class GardenPlantingRepository private constructor(
         @Volatile private var instance: GardenPlantingRepository? = null
 
         fun getInstance(gardenPlantingDao: GardenPlantingDao) =
-                instance ?: synchronized(this) {
-                    instance ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
+                instance
+                        ?: synchronized(this) {
+                    instance
+                            ?: GardenPlantingRepository(gardenPlantingDao).also { instance = it }
                 }
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.data
+package com.google.samples.apps.sunflower.data.source
 
-import com.google.samples.apps.sunflower.data.local.PlantDao
+import com.google.samples.apps.sunflower.data.source.local.PlantDao
 
 /**
  * Repository module for handling data operations.
@@ -37,7 +37,8 @@ class PlantRepository private constructor(private val plantDao: PlantDao) {
 
         fun getInstance(plantDao: PlantDao) =
                 instance ?: synchronized(this) {
-                    instance ?: PlantRepository(plantDao).also { instance = it }
+                    instance
+                            ?: PlantRepository(plantDao).also { instance = it }
                 }
     }
 }

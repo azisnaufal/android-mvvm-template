@@ -20,8 +20,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.platform.app.InstrumentationRegistry
-import com.google.samples.apps.sunflower.data.local.AppDatabase
-import com.google.samples.apps.sunflower.data.local.GardenPlantingDao
+import com.google.samples.apps.sunflower.data.source.local.AppDatabase
+import com.google.samples.apps.sunflower.data.source.local.GardenPlantingDao
 import com.google.samples.apps.sunflower.data.model.GardenPlanting
 import com.google.samples.apps.sunflower.utilities.getValue
 import com.google.samples.apps.sunflower.utilities.testCalendar
