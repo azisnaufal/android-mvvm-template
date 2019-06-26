@@ -16,13 +16,12 @@
 
 package com.google.samples.apps.sunflower.utilities.base
 
-import android.app.Application
 import androidx.databinding.ObservableField
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.samples.apps.sunflower.utilities.helper.Event
 
-open class BaseViewModel (application: Application) : AndroidViewModel(application){
+open class BaseViewModel () : ViewModel(){
 
     val isRequesting = ObservableField<Boolean>(false)
     val showMessage = MutableLiveData<Event<String>>()

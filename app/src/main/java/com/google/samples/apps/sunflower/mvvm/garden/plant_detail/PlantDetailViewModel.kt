@@ -23,6 +23,7 @@ import androidx.lifecycle.map
 import com.google.samples.apps.sunflower.data.source.GardenPlantingRepository
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.data.source.PlantRepository
+import com.google.samples.apps.sunflower.utilities.base.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class PlantDetailViewModel(
         plantRepository: PlantRepository,
         private val gardenPlantingRepository: GardenPlantingRepository,
         private val plantId: String
-) : ViewModel() {
+) : BaseViewModel() {
 
     val isPlanted: LiveData<Boolean>
     val plant: LiveData<Plant>

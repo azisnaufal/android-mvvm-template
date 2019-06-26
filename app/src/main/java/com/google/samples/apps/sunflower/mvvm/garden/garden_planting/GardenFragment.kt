@@ -25,11 +25,41 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.base.BaseFragment
 
-class GardenFragment : Fragment() {
+class GardenFragment : BaseFragment<GardenPlantingListViewModel>() {
 
     private val viewModel: GardenPlantingListViewModel by viewModels {
         InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
+    }
+    private lateinit var binding : FragmentGardenBinding
+    private lateinit var adapter : GardenPlantingAdapter
+
+    override fun onCreateObserver(viewModel: GardenPlantingListViewModel) {
+        viewModel.apply {
+            gardenPlantings.observe(viewLifecycleOwner) { plantings ->
+                binding.hasPlantings = !plantings.isNullOrEmpty()
+            }
+
+            plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
+                if (!result.isNullOrEmpty())
+                    adapter.submitList(result)
+            }
+        }
+    }
+
+    override fun setContentData() {
+        adapter = GardenPlantingAdapter()
+        binding.gardenList.adapter = adapter
+    }
+
+    override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
+
+    override fun onDestroyObserver(viewModel: GardenPlantingListViewModel) {
+        viewModel.apply {
+            gardenPlantings.removeObservers(viewLifecycleOwner)
+            plantAndGardenPlantings.removeObservers(viewLifecycleOwner)
+        }
     }
 
     override fun onCreateView(
@@ -37,21 +67,9 @@ class GardenFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentGardenBinding.inflate(inflater, container, false)
-        val adapter = GardenPlantingAdapter()
-        binding.gardenList.adapter = adapter
-        subscribeUi(adapter, binding)
+        binding = FragmentGardenBinding.inflate(inflater, container, false)
+        mParentVM = viewModel
         return binding.root
     }
 
-    private fun subscribeUi(adapter: GardenPlantingAdapter, binding: FragmentGardenBinding) {
-        viewModel.gardenPlantings.observe(viewLifecycleOwner) { plantings ->
-            binding.hasPlantings = !plantings.isNullOrEmpty()
-        }
-
-        viewModel.plantAndGardenPlantings.observe(viewLifecycleOwner) { result ->
-            if (!result.isNullOrEmpty())
-                adapter.submitList(result)
-        }
-    }
 }

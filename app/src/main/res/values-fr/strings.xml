@@ -43,4 +43,6 @@
     <!-- Accessibility -->
     <string name="a11y_plant_item_image">Image de plante</string>
 
+    <string name="text_close">Ferme le</string>
+
 </resources>

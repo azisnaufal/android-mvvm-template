@@ -27,7 +27,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
@@ -35,17 +34,39 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.databinding.FragmentPlantDetailBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
+import com.google.samples.apps.sunflower.utilities.base.BaseFragment
 
 /**
  * A fragment representing a single Plant detail screen.
  */
-class PlantDetailFragment : Fragment() {
-
+class PlantDetailFragment : BaseFragment<PlantDetailViewModel>() {
     private val args: PlantDetailFragmentArgs by navArgs()
     private lateinit var shareText: String
 
     private val plantDetailViewModel: PlantDetailViewModel by viewModels {
         InjectorUtils.providePlantDetailViewModelFactory(requireActivity(), args.plantId)
+    }
+
+    override fun onCreateObserver(viewModel: PlantDetailViewModel) {
+        viewModel.apply {
+            plant.observe(viewLifecycleOwner) { plant ->
+                shareText = if (plant == null) {
+                    ""
+                } else {
+                    getString(R.string.share_text_plant, plant.name)
+                }
+            }
+        }
+    }
+
+    override fun setContentData() {}
+
+    override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
+
+    override fun onDestroyObserver(viewModel: PlantDetailViewModel) {
+        viewModel.apply {
+            plant.removeObservers(viewLifecycleOwner)
+        }
     }
 
     override fun onCreateView(
@@ -56,18 +77,11 @@ class PlantDetailFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
                 inflater, R.layout.fragment_plant_detail, container, false).apply {
             viewModel = plantDetailViewModel
+            mParentVM = plantDetailViewModel
             lifecycleOwner = this@PlantDetailFragment
             fab.setOnClickListener { view ->
                 plantDetailViewModel.addPlantToGarden()
                 Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
-            }
-        }
-
-        plantDetailViewModel.plant.observe(this) { plant ->
-            shareText = if (plant == null) {
-                ""
-            } else {
-                getString(R.string.share_text_plant, plant.name)
             }
         }
 

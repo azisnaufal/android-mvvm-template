@@ -22,11 +22,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.data.source.PlantRepository
+import com.google.samples.apps.sunflower.utilities.base.BaseViewModel
 
 /**
  * The ViewModel for [PlantListFragment].
  */
-class PlantListViewModel internal constructor(plantRepository: PlantRepository) : ViewModel() {
+class PlantListViewModel internal constructor(plantRepository: PlantRepository) : BaseViewModel() {
 
     private val growZoneNumber = MutableLiveData<Int>().apply { value = NO_GROW_ZONE }
 

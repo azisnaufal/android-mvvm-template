@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.utilities
+package com.google.samples.apps.sunflower.utilities.helper
 
 /**
  * A helper function to determine a Plant's growing zone for a given latitude.
