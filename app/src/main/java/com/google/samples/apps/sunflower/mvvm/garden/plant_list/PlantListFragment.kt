@@ -24,6 +24,7 @@ import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.databinding.FragmentPlantListBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.utilities.base.BaseFragment
+import com.google.samples.apps.sunflower.utilities.helper.EventObserver
 
 class PlantListFragment : BaseFragment<PlantListViewModel>() {
     private lateinit var binding : FragmentPlantListBinding
@@ -41,21 +42,21 @@ class PlantListFragment : BaseFragment<PlantListViewModel>() {
              */
             if (plants != null) adapter.submitList(plants)
         }
+        viewModel.isRequesting.observe(viewLifecycleOwner, EventObserver{
+            binding.swipeRefresh.isRefreshing = it
+        })
     }
 
     override fun setContentData() {
         adapter = PlantAdapter()
         binding.plantList.adapter = adapter
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.setPlants()
+        }
+        viewModel.setPlants()
     }
 
     override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
-
-
-    override fun onDestroyObserver(viewModel: PlantListViewModel) {
-        viewModel.apply {
-            plants.removeObservers(binding.lifecycleOwner!!)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

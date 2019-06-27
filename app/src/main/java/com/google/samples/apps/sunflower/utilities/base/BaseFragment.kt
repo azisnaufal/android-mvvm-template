@@ -72,17 +72,9 @@ abstract class BaseFragment<T : BaseViewModel> : Fragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        onDestroyObserver(mParentVM)
-    }
-
-
     abstract fun onCreateObserver(viewModel: T)
     abstract fun setContentData()
     abstract fun setMessageType(): String
-    abstract fun onDestroyObserver(viewModel: T)
-
 
     companion object {
         const val MESSAGE_TYPE_TOAST = "TOAST_TYPE"

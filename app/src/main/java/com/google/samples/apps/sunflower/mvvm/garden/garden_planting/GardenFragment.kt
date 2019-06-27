@@ -55,13 +55,6 @@ class GardenFragment : BaseFragment<GardenPlantingListViewModel>() {
 
     override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
 
-    override fun onDestroyObserver(viewModel: GardenPlantingListViewModel) {
-        viewModel.apply {
-            gardenPlantings.removeObservers(viewLifecycleOwner)
-            plantAndGardenPlantings.removeObservers(viewLifecycleOwner)
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

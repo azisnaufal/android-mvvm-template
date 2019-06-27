@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 Google LLC
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.google.samples.apps.sunflower.utilities.base
+package com.google.samples.apps.sunflower.data.source.remote.plants
 
-import android.view.View
-import androidx.databinding.BindingAdapter
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.samples.apps.sunflower.data.model.Plant
+import kotlinx.coroutines.Deferred
+import retrofit2.http.GET
 
-@BindingAdapter("isGone")
-fun bindIsGone(view: View, isGone: Boolean) {
-    view.visibility = if (isGone) {
-        View.GONE
-    } else {
-        View.VISIBLE
-    }
+interface PlantsApiService{
+
+    @GET("plants.json")
+    fun getPlants() : Deferred<List<Plant>>
+
 }

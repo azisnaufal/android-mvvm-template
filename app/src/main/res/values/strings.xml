@@ -17,7 +17,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Resources that do not require translation -->
-    <string name="app_name" translatable="false">Sunflower</string>
     <string name="navigation_drawer_header_title" translatable="false">Sunflower</string>
 
     <!-- Translatable resources -->
