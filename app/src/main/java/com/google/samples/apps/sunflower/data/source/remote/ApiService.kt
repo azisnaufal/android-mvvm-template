@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 
 interface ApiService {
     companion object Factory {
-        val getApiService: Retrofit by lazy {
+        val getApiService : Retrofit by lazy {
             val mLoggingInterceptor = HttpLoggingInterceptor()
             mLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -58,6 +58,6 @@ interface ApiService {
             return@lazy mRetrofit
         }
 
-        val plantsApiService: PlantsApiService = getApiService.create(PlantsApiService::class.java)
+        val plantsApiService : PlantsApiService = getApiService.create(PlantsApiService::class.java)
     }
 }
