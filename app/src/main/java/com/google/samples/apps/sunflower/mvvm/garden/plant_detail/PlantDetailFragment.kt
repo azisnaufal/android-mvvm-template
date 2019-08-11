@@ -2,10 +2,10 @@ package com.google.samples.apps.sunflower.mvvm.garden.plant_detail
 
 import android.content.Intent
 import android.os.Build
-import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.core.app.ShareCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
@@ -18,7 +18,20 @@ import com.google.samples.apps.sunflower.utilities.base.BaseFragment
 /**
  * A fragment representing a single Plant detail screen.
  */
-class PlantDetailFragment : BaseFragment<PlantDetailViewModel>() {
+class PlantDetailFragment : BaseFragment<PlantDetailViewModel, FragmentPlantDetailBinding>(R.layout.fragment_plant_detail) {
+    override fun afterInflateView() {
+        mBinding.apply {
+            viewModel = plantDetailViewModel
+            lifecycleOwner = this@PlantDetailFragment
+            fab.setOnClickListener { view ->
+                plantDetailViewModel.addPlantToGarden()
+                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
+            }
+        }
+        mParentVM = plantDetailViewModel
+        setHasOptionsMenu(true)
+    }
+
     private val args: PlantDetailFragmentArgs by navArgs()
     private lateinit var shareText: String
 
@@ -41,27 +54,6 @@ class PlantDetailFragment : BaseFragment<PlantDetailViewModel>() {
     override fun setContentData() {}
 
     override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = DataBindingUtil.inflate<FragmentPlantDetailBinding>(
-                inflater, R.layout.fragment_plant_detail, container, false).apply {
-            viewModel = plantDetailViewModel
-            mParentVM = plantDetailViewModel
-            lifecycleOwner = this@PlantDetailFragment
-            fab.setOnClickListener { view ->
-                plantDetailViewModel.addPlantToGarden()
-                Snackbar.make(view, R.string.added_plant_to_garden, Snackbar.LENGTH_LONG).show()
-            }
-        }
-
-        setHasOptionsMenu(true)
-
-        return binding.root
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_plant_detail, menu)

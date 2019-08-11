@@ -1,20 +1,17 @@
 package com.google.samples.apps.sunflower.mvvm.garden.garden_planting
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import com.google.samples.apps.sunflower.R
 import com.google.samples.apps.sunflower.databinding.FragmentGardenBinding
 import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.utilities.base.BaseFragment
 
-class GardenFragment : BaseFragment<GardenPlantingListViewModel>() {
-
+class GardenFragment : BaseFragment<GardenPlantingListViewModel, FragmentGardenBinding>(R.layout.fragment_garden) {
     private val viewModel: GardenPlantingListViewModel by viewModels {
         InjectorUtils.provideGardenPlantingListViewModelFactory(requireContext())
     }
+
     private lateinit var binding : FragmentGardenBinding
     private lateinit var adapter : GardenPlantingAdapter
 
@@ -38,14 +35,7 @@ class GardenFragment : BaseFragment<GardenPlantingListViewModel>() {
 
     override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentGardenBinding.inflate(inflater, container, false)
+    override fun afterInflateView() {
         mParentVM = viewModel
-        return binding.root
     }
-
 }

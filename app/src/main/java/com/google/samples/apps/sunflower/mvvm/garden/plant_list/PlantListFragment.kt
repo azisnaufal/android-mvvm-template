@@ -1,7 +1,8 @@
 package com.google.samples.apps.sunflower.mvvm.garden.plant_list
 
-import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import com.google.samples.apps.sunflower.R
@@ -10,7 +11,14 @@ import com.google.samples.apps.sunflower.utilities.InjectorUtils
 import com.google.samples.apps.sunflower.utilities.base.BaseFragment
 import com.google.samples.apps.sunflower.utilities.helper.EventObserver
 
-class PlantListFragment : BaseFragment<PlantListViewModel>() {
+class PlantListFragment : BaseFragment<PlantListViewModel, FragmentPlantListBinding>(R.layout.fragment_plant_list) {
+    override fun afterInflateView() {
+        if (context != null) {
+            setHasOptionsMenu(true)
+        }
+        mParentVM = viewModel
+    }
+
     private lateinit var binding : FragmentPlantListBinding
     private lateinit var adapter : PlantAdapter
     private val viewModel: PlantListViewModel by viewModels {
@@ -41,19 +49,6 @@ class PlantListFragment : BaseFragment<PlantListViewModel>() {
     }
 
     override fun setMessageType(): String = MESSAGE_TYPE_SNACK_CUSTOM
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPlantListBinding.inflate(inflater, container, false)
-        mParentVM = viewModel
-        context?: return binding.root
-
-        setHasOptionsMenu(true)
-        return binding.root
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_plant_list, menu)
