@@ -8,7 +8,9 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
 import com.google.samples.apps.sunflower.R
+import com.google.samples.apps.sunflower.data.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.data.source.local.PlantAndGardenPlantings
 import com.google.samples.apps.sunflower.databinding.ListItemGardenPlantingBinding
 
@@ -27,7 +29,6 @@ class GardenPlantingAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         getItem(position).let { plantings ->
             with(holder) {
-                itemView.tag = plantings
                 bind(createOnClickListener(plantings.plant.plantId), plantings)
             }
         }
@@ -35,8 +36,7 @@ class GardenPlantingAdapter :
 
     private fun createOnClickListener(plantId: String): View.OnClickListener {
         return View.OnClickListener {
-                val direction =
-                        GardenFragmentDirections.actionGardenFragmentToPlantDetailFragment(plantId)
+            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
                 it.findNavController().navigate(direction)
         }
     }

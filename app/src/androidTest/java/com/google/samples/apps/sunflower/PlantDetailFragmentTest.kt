@@ -18,6 +18,7 @@ import com.google.samples.apps.sunflower.utilities.chooser
 import com.google.samples.apps.sunflower.utilities.testPlant
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,11 +35,12 @@ class PlantDetailFragmentTest {
         activityTestRule.activity.apply {
             runOnUiThread {
                 val bundle = Bundle().apply { putString("plantId", testPlant.plantId) }
-                findNavController(R.id.garden_nav_fragment).navigate(R.id.plant_detail_fragment, bundle)
+                findNavController(R.id.nav_host).navigate(R.id.plant_detail_fragment, bundle)
             }
         }
     }
 
+    @Ignore("Share button redesign pending")
     @Test
     fun testShareTextIntent() {
         val shareText = activityTestRule.activity.getString(R.string.share_text_plant, testPlant.name)
@@ -46,19 +48,19 @@ class PlantDetailFragmentTest {
         Intents.init()
         onView(withId(R.id.action_share)).perform(click())
         intended(
-            chooser(
-                allOf(
-                    hasAction(Intent.ACTION_SEND),
-                    hasType("text/plain"),
-                    hasExtra(Intent.EXTRA_TEXT, shareText)
+                chooser(
+                        allOf(
+                                hasAction(Intent.ACTION_SEND),
+                                hasType("text/plain"),
+                                hasExtra(Intent.EXTRA_TEXT, shareText)
+                        )
                 )
-            )
         )
         Intents.release()
 
         // dismiss the Share Dialog
         InstrumentationRegistry.getInstrumentation()
-            .uiAutomation
-            .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
+                .uiAutomation
+                .performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK)
     }
 }
