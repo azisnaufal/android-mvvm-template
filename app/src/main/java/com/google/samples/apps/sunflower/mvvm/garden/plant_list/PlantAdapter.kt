@@ -8,18 +8,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.samples.apps.sunflower.HomeViewPagerFragmentDirections
-import com.google.samples.apps.sunflower.PlantListFragment
 import com.google.samples.apps.sunflower.R
-import com.google.samples.apps.sunflower.data.Plant
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.databinding.ListItemPlantBinding
+import com.google.samples.apps.sunflower.mvvm.garden.HomeViewPagerFragmentDirections
 
 /**
  * Adapter for the [RecyclerView] in [PlantListFragment].
  */
 class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallback()) {
-
     /**
      * Int array of all the positions with header-style cards
      */
@@ -40,9 +37,7 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
             val plant = getItem(position)
 
             // cast generic RecyclerView.ViewHolder to Plant view holder
-            (holder as PlantViewHolder).apply {
-                bind(createOnClickListener(plant.plantId), plant)
-            }
+            (holder as PlantViewHolder).bind(plant)
         }
     }
 
@@ -87,20 +82,27 @@ class PlantAdapter : ListAdapter<Plant, RecyclerView.ViewHolder>(PlantDiffCallba
         }
     }
 
-    private fun createOnClickListener(plantId: String): View.OnClickListener {
-        return View.OnClickListener {
-            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plantId)
+    class PlantViewHolder(
+            private val binding: ListItemPlantBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.setClickListener {
+                binding.plant?.let { plant ->
+                    navigateToPlant(plant, it)
+                }
+            }
+        }
+
+        private fun navigateToPlant(
+                plant: Plant,
+                it: View
+        ) {
+            val direction = HomeViewPagerFragmentDirections.actionViewPagerFragmentToPlantDetailFragment(plant.plantId)
             it.findNavController().navigate(direction)
         }
-    }
 
-    class PlantViewHolder(
-        private val binding: ListItemPlantBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(listener: View.OnClickListener, item: Plant) {
+        fun bind(item: Plant) {
             binding.apply {
-                clickListener = listener
                 plant = item
                 executePendingBindings()
             }

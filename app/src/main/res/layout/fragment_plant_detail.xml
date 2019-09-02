@@ -4,17 +4,22 @@
 
     <data>
 
+        <import type="com.google.samples.apps.sunflower.data.model.Plant" />
         <variable
             name="viewModel"
             type="com.google.samples.apps.sunflower.mvvm.garden.plant_detail.PlantDetailViewModel" />
+
+        <variable
+            name="callback"
+            type="com.google.samples.apps.sunflower.mvvm.garden.plant_detail.PlantDetailFragment.Callback" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.google.samples.apps.sunflower.mvvm.garden.GardenActivity"
         android:background="?attr/colorSurface"
+        tools:context="com.google.samples.apps.sunflower.GardenActivity"
         tools:ignore="MergeRootFrame">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -23,8 +28,8 @@
             android:layout_height="@dimen/plant_detail_app_bar_height"
             android:fitsSystemWindows="true"
             android:animateLayoutChanges="true"
-            android:background="?attr/colorSurface"
             android:stateListAnimator="@animator/show_toolbar"
+            android:background="?attr/colorSurface"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -32,10 +37,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:collapsedTitleGravity="center"
-                app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
                 app:contentScrim="?attr/colorSurface"
                 app:statusBarScrim="?attr/colorSurface"
+                app:collapsedTitleGravity="center"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.Sunflower.Toolbar.Text"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:title="@{viewModel.plant.name}"
                 app:titleEnabled="false"
@@ -148,8 +153,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:tint="@android:color/white"
-            app:layout_anchor="@id/appbar"
+            android:onClick="@{() -> callback.add(viewModel.plant)}"
             app:isGone="@{viewModel.isPlanted}"
+            app:layout_anchor="@id/appbar"
             app:shapeAppearance="@style/ShapeAppearance.Sunflower.FAB"
             app:layout_anchorGravity="bottom|end"
             app:srcCompat="@drawable/ic_plus" />

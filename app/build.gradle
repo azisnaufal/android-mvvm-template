@@ -18,6 +18,8 @@ android {
         versionCode 1
         versionName "0.1.6"
         vectorDrawables.useSupportLibrary true
+        buildConfigField "String", "BASE_URL", '"https://raw.githubusercontent.com/googlesamples/android-sunflower/master/app/src/main/assets/"'
+
     }
     buildTypes {
         release {
@@ -34,23 +36,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-
-    productFlavors {
-        production {
-            buildConfigField "String", "BASE_URL", '"https://raw.githubusercontent.com/googlesamples/android-sunflower/master/app/src/main/assets/"'
-            resValue "string", "app_name", "Sunflower"
-        }
-        development {
-            applicationIdSuffix ".development"
-            buildConfigField "String", "BASE_URL", '"https://raw.githubusercontent.com/googlesamples/android-sunflower/master/app/src/main/assets/"'
-            resValue "string", "app_name", "Sunflower-dev"
-        }
-    }
 }
 
 dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$rootProject.swipeRefreshVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.core:core-ktx:$rootProject.ktxVersion"

@@ -12,6 +12,26 @@ import com.google.samples.apps.sunflower.utilities.base.BaseFragment
 import com.google.samples.apps.sunflower.utilities.helper.EventObserver
 
 class PlantListFragment : BaseFragment<PlantListViewModel, FragmentPlantListBinding>(R.layout.fragment_plant_list) {
+    private lateinit var adapter : PlantAdapter
+    private val viewModel: PlantListViewModel by viewModels {
+        InjectorUtils.providePlantListViewModelFactory(requireContext())
+    }
+
+    override fun onCreateObserver(viewModel: PlantListViewModel) {
+        viewModel.growZoneNumber.observe(viewLifecycleOwner) {
+            viewModel.setPlants()
+        }
+
+        viewModel.plants.observe(viewLifecycleOwner) { plants ->
+            if (plants != null)
+                adapter.submitList(plants)
+        }
+
+        viewModel.isRequesting.observe(viewLifecycleOwner, EventObserver {
+            mBinding.swipeRefresh.isRefreshing = it
+        })
+    }
+
     override fun afterInflateView() {
         if (context != null) {
             setHasOptionsMenu(true)
@@ -19,30 +39,10 @@ class PlantListFragment : BaseFragment<PlantListViewModel, FragmentPlantListBind
         mParentVM = viewModel
     }
 
-    private lateinit var binding : FragmentPlantListBinding
-    private lateinit var adapter : PlantAdapter
-    private val viewModel: PlantListViewModel by viewModels {
-        InjectorUtils.providePlantListViewModelFactory(requireContext())
-    }
-
-    override fun onCreateObserver(viewModel: PlantListViewModel) {
-        viewModel.plants.observe(viewLifecycleOwner) { plants ->
-            /**
-             *  Plant may return null, but the [observe] extension function assumes it will not be null.
-             *  So there will be a warning（Condition `plants != null` is always `true`） here.
-             *  I am not sure if the database return data type should be defined as nullable, Such as `LiveData<List<Plant>?>` .
-             */
-            if (plants != null) adapter.submitList(plants)
-        }
-        viewModel.isRequesting.observe(viewLifecycleOwner, EventObserver {
-            binding.swipeRefresh.isRefreshing = it
-        })
-    }
-
     override fun setContentData() {
         adapter = PlantAdapter()
-        binding.plantList.adapter = adapter
-        binding.swipeRefresh.setOnRefreshListener {
+        mBinding.plantList.adapter = adapter
+        mBinding.swipeRefresh.setOnRefreshListener {
             viewModel.setPlants()
         }
         viewModel.setPlants()

@@ -22,7 +22,7 @@
                 app:spanCount="@integer/grid_columns"
                 android:paddingLeft="@dimen/margin_normal"
                 android:paddingRight="@dimen/margin_normal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
                 tools:context="com.google.samples.apps.sunflower.mvvm.garden.GardenActivity"
                 tools:listitem="@layout/list_item_plant" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

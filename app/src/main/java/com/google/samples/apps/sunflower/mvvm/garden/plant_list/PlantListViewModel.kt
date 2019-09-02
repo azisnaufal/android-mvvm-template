@@ -13,19 +13,15 @@ import kotlinx.coroutines.launch
  */
 class PlantListViewModel internal constructor(val plantRepository: PlantRepository) : BaseViewModel() {
 
-    private val growZoneNumber = MutableLiveData<Int>().apply { value = NO_GROW_ZONE }
+    val growZoneNumber = MutableLiveData<Int>(NO_GROW_ZONE)
 
-    var plants: MutableLiveData<List<Plant>> = MutableLiveData()
+    var plants = MutableLiveData<List<Plant>>()
 
     fun setPlants() {
-        if (growZoneNumber.value == NO_GROW_ZONE) {
-            isRequesting.value = Event(true)
-            viewModelScope.launch {
-                plants.value = plantRepository.getPlants()
-                isRequesting.value = Event(false)
-            }
-        } else {
-            plants.value = plantRepository.getPlantsWithGrowZoneNumber(growZoneNumber.value!!).value
+        isRequesting.value = Event(true)
+        viewModelScope.launch {
+            plants.value = if (growZoneNumber.value == NO_GROW_ZONE) plantRepository.getPlants() else plantRepository.getPlantsWithGrowZoneNumber(growZoneNumber.value!!)
+            isRequesting.value = Event(false)
         }
     }
 

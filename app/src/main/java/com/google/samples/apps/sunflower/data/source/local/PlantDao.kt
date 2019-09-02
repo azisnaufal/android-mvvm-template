@@ -13,10 +13,10 @@ import com.google.samples.apps.sunflower.data.model.Plant
 @Dao
 interface PlantDao {
     @Query("SELECT * FROM plants ORDER BY name")
-    fun getPlants(): LiveData<List<Plant>>
+    suspend fun getPlants(): List<Plant>
 
     @Query("SELECT * FROM plants WHERE growZoneNumber = :growZoneNumber ORDER BY name")
-    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): LiveData<List<Plant>>
+    suspend fun getPlantsWithGrowZoneNumber(growZoneNumber: Int): List<Plant>
 
     @Query("SELECT * FROM plants WHERE id = :plantId")
     fun getPlant(plantId: String): LiveData<Plant>

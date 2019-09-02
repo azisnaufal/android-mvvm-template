@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/view_pager_fragment"
-        android:name="com.google.samples.apps.sunflower.HomeViewPagerFragment"
+        android:name="com.google.samples.apps.sunflower.mvvm.garden.HomeViewPagerFragment"
         tools:layout="@layout/fragment_view_pager">
 
         <action

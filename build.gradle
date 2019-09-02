@@ -20,7 +20,7 @@ buildscript {
         ktlintVersion = '0.30.0'
         ktxVersion = '1.2.0-alpha03'
         lifecycleVersion = '2.2.0-alpha03'
-        materialVersion = '1.0.0'
+        materialVersion = '1.1.0-alpha09'
         navigationVersion = '2.0.0'
         recyclerViewVersion = '1.1.0-beta03'
         roomVersion = '2.1.0'
@@ -36,6 +36,9 @@ buildscript {
         loggingInterceptorVersion = "3.8.0"
         retrofit2kotlinadapterVersion = "0.9.2"
         converterGsonVersion = "2.6.0"
+        viewPagerVersion = '1.0.0-beta03'
+        swipeRefreshVersion = "1.1.0-alpha02"
+
     }
 
     repositories {

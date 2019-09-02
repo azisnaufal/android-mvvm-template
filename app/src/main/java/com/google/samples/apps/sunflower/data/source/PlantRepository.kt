@@ -15,18 +15,18 @@ class PlantRepository private constructor(private val plantDao: PlantDao) {
     suspend fun getPlants(): List<Plant> {
         val response = ApiService.plantsApiService.getPlants()
         try {
-            if (response.size > 0) {
+            if (response.isNotEmpty()) {
                 plantDao.insertAll(response)
             }
         } catch (e: Throwable) {
             Log.e(TAG, e.toString())
         }
-        return response
+        return plantDao.getPlants()
     }
 
     fun getPlant(plantId: String) = plantDao.getPlant(plantId)
 
-    fun getPlantsWithGrowZoneNumber(growZoneNumber: Int) =
+    suspend fun getPlantsWithGrowZoneNumber(growZoneNumber: Int) =
             plantDao.getPlantsWithGrowZoneNumber(growZoneNumber)
 
     companion object {

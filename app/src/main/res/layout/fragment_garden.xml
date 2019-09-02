@@ -6,32 +6,32 @@
     <data>
 
         <variable
-                name="hasPlantings"
-                type="boolean" />
+            name="hasPlantings"
+            type="boolean" />
 
     </data>
 
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/garden_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
+            android:id="@+id/garden_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_marginStart="@dimen/card_side_margin"
             android:layout_marginTop="@dimen/margin_normal"
             android:layout_marginEnd="@dimen/card_side_margin"
-                app:isGone="@{!hasPlantings}"
+            android:clipToPadding="false"
+            app:isGone="@{!hasPlantings}"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:spanCount="@integer/grid_columns"
-                tools:listitem="@layout/list_item_garden_planting"/>
+            tools:listitem="@layout/list_item_garden_planting" />
 
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
             app:isGone="@{hasPlantings}">
 
