@@ -23,8 +23,7 @@ class PlantListFragment : BaseFragment<PlantListViewModel, FragmentPlantListBind
         }
 
         viewModel.plants.observe(viewLifecycleOwner) { plants ->
-            if (plants != null)
-                adapter.submitList(plants)
+            adapter.submitList(plants)
         }
 
         viewModel.isRequesting.observe(viewLifecycleOwner, EventObserver {

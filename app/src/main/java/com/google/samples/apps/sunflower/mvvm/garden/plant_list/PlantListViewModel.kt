@@ -1,5 +1,6 @@
 package com.google.samples.apps.sunflower.mvvm.garden.plant_list
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.samples.apps.sunflower.data.model.Plant
@@ -13,27 +14,31 @@ import kotlinx.coroutines.launch
  */
 class PlantListViewModel internal constructor(val plantRepository: PlantRepository) : BaseViewModel() {
 
-    val growZoneNumber = MutableLiveData<Int>(NO_GROW_ZONE)
+    private val _growZoneNumber = MutableLiveData<Int>(NO_GROW_ZONE)
+    val growZoneNumber: LiveData<Int>
+        get() = _growZoneNumber
 
-    var plants = MutableLiveData<List<Plant>>()
+    private var _plants = MutableLiveData<List<Plant>>()
+    val plants: LiveData<List<Plant>>
+        get() = _plants
 
     fun setPlants() {
         isRequesting.value = Event(true)
         viewModelScope.launch {
-            plants.value = if (growZoneNumber.value == NO_GROW_ZONE) plantRepository.getPlants() else plantRepository.getPlantsWithGrowZoneNumber(growZoneNumber.value!!)
+            _plants.value = if (_growZoneNumber.value == NO_GROW_ZONE) plantRepository.getPlants() else plantRepository.getPlantsWithGrowZoneNumber(_growZoneNumber.value!!)
             isRequesting.value = Event(false)
         }
     }
 
     fun setGrowZoneNumber(num: Int) {
-        growZoneNumber.value = num
+        _growZoneNumber.value = num
     }
 
     fun clearGrowZoneNumber() {
-        growZoneNumber.value = NO_GROW_ZONE
+        _growZoneNumber.value = NO_GROW_ZONE
     }
 
-    fun isFiltered() = growZoneNumber.value != NO_GROW_ZONE
+    fun isFiltered() = _growZoneNumber.value != NO_GROW_ZONE
 
     companion object {
         private const val NO_GROW_ZONE = -1

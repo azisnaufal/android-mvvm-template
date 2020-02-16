@@ -1,5 +1,6 @@
 package com.google.samples.apps.sunflower.data.source
 
+import android.content.Context
 import android.util.Log
 import com.google.samples.apps.sunflower.data.model.Plant
 import com.google.samples.apps.sunflower.data.source.local.PlantDao
@@ -8,7 +9,7 @@ import com.google.samples.apps.sunflower.data.source.remote.ApiService
 /**
  * Repository module for handling data operations.
  */
-class PlantRepository private constructor(private val plantDao: PlantDao) {
+class PlantRepository private constructor(private val plantDao: PlantDao, private val context: Context) {
 
     private val TAG by lazy { PlantRepository::class.java.simpleName }
 
@@ -34,10 +35,10 @@ class PlantRepository private constructor(private val plantDao: PlantDao) {
         // For Singleton instantiation
         @Volatile private var instance: PlantRepository? = null
 
-        fun getInstance(plantDao: PlantDao) =
+        fun getInstance(plantDao: PlantDao, context: Context) =
                 instance ?: synchronized(this) {
                     instance
-                            ?: PlantRepository(plantDao).also { instance = it }
+                            ?: PlantRepository(plantDao, context).also { instance = it }
                 }
     }
 }

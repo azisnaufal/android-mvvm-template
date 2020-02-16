@@ -8,7 +8,7 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
 
 interface ApiService {
@@ -26,6 +26,12 @@ interface ApiService {
                             val request = chain.request().apply {
                                 newBuilder().header("Cache-Control",
                                         "public, max-age=" + 5).build()
+
+                                //query parameter is used to put param to every request
+                                //just like @Query in a single request
+                                val url = url.newBuilder()
+                                        .addQueryParameter("api_key", "put_an_api_key_here").build()
+                                newBuilder().url(url).build()
                             }
                             chain.proceed(request)
                         }
@@ -40,6 +46,12 @@ interface ApiService {
                             val request = chain.request().apply {
                                 newBuilder().header("Cache-Control",
                                         "public, max-age=" + 5).build()
+
+                                //query parameter is used to put param to every request
+                                //just like @Query in a single request
+                                val url = url.newBuilder()
+                                        .addQueryParameter("api_key", "put_an_api_key_here").build()
+                                newBuilder().url(url).build()
                             }
                             chain.proceed(request)
                         }
@@ -50,7 +62,7 @@ interface ApiService {
 
             val mRetrofit = Retrofit.Builder()
                     .baseUrl(BuildConfig.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(MoshiConverterFactory.create())
                     .addCallAdapterFactory(CoroutineCallAdapterFactory())
                     .client(mClient)
                     .build()
